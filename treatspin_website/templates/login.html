@@ -1,0 +1,38 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome | TreatSpin</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="login-page">
+  <div class="login-card">
+    <div class="logo">Treat<span>Spin</span>™</div>
+    <div class="paw">🐾</div>
+    <h1>Welcome back</h1>
+    <p class="muted">Sign in to shop smarter for your best friend.</p>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="notice">{{ messages[0] }}</div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+      <label>Email</label>
+      <input type="email" name="email" placeholder="you@example.com" required>
+
+      <label>Password</label>
+      <input type="password" name="password" placeholder="••••••••" required>
+
+      <button class="primary full" type="submit">Sign In</button>
+    </form>
+
+    <div class="divider"><span>or</span></div>
+    <button class="social" type="button">Continue with Google</button>
+    <p class="small">Demo store: any valid email + password will sign you in.</p>
+  </div>
+</body>
+</html>

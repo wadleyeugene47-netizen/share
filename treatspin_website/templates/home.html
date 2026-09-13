@@ -1,0 +1,88 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ product.name }} | TreatSpin</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <a class="logo" href="/">Treat<span>Spin</span>™</a>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#details">Details</a>
+      <span class="user">Hi, {{ user }}</span>
+      <a class="logout" href="/logout">Log out</a>
+    </nav>
+  </header>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="toast">{{ messages[0] }}</div>
+    {% endif %}
+  {% endwith %}
+
+  <main>
+    <section class="hero">
+      <div class="product-visual">
+        <div class="blob"></div>
+        <img src="{{ url_for('static', filename='product.jpg') }}" alt="Treat dispensing pet balls">
+        <div class="badge">BEST<br>SELLER</div>
+      </div>
+
+      <div class="hero-copy">
+        <p class="eyebrow">SMART PLAY • HAPPY PETS</p>
+        <h1>Turn treat time into <em>play time.</em></h1>
+        <p class="lead">{{ product.description }}</p>
+
+        <div class="rating">★★★★★ <span>4.9/5 · 1,200+ happy pet parents</span></div>
+
+        <div class="price-row">
+          <strong>${{ "%.2f"|format(product.price) }}</strong>
+          <span class="old-price">$29.99</span>
+          <span class="save">SAVE 33%</span>
+        </div>
+
+        <form method="POST" action="/buy">
+          <button class="primary buy" type="submit">Add to Cart →</button>
+        </form>
+        <p class="shipping">✓ Free shipping · ✓ 30-day returns · ✓ Secure checkout</p>
+      </div>
+    </section>
+
+    <section id="features" class="features">
+      <div>
+        <span>🧠</span>
+        <h3>Mental stimulation</h3>
+        <p>Turn snacks into a rewarding puzzle that keeps pets engaged.</p>
+      </div>
+      <div>
+        <span>🏃</span>
+        <h3>Active play</h3>
+        <p>Rolling movement encourages pets to chase, paw, and explore.</p>
+      </div>
+      <div>
+        <span>🧼</span>
+        <h3>Easy to clean</h3>
+        <p>Simple design makes refilling and cleaning quick and easy.</p>
+      </div>
+    </section>
+
+    <section id="details" class="details">
+      <div>
+        <p class="eyebrow">WHY PET PARENTS LOVE IT</p>
+        <h2>A little challenge. A lot of tail wags.</h2>
+      </div>
+      <ul>
+        {% for feature in product.features %}
+          <li>✓ {{ feature }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+  </main>
+
+  <footer>© 2026 TreatSpin™ · Made for happier playtime.</footer>
+</body>
+</html>
